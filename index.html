@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GTA-VLA Project Page</title>
+  <meta name="description" content="GTA-VLA: Guide, Think, Act. Interactive Vision-Language-Action framework for spatially steerable embodied reasoning.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .section-title { margin-bottom: 1rem; }
+    .paper-box { background: #f5f5f5; border-radius: 8px; padding: 1.2rem; }
+    .media-img { width: 100%; border: 1px solid #ddd; border-radius: 8px; background: #fff; display: block; }
+    .teaser-img { width: 78%; margin: 0 auto; }
+    .figure-wrap { max-width: 100%; margin: 0 auto; }
+    .caption-text { margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.6; color: #444; }
+    .media-link { margin-top: 0.6rem; }
+    .paper-links .button { margin: 0.25rem; }
+    .main-container { max-width: 980px; margin: 0 auto; }
+    .video-grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+    .video-grid-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-top: 0.8rem; }
+    .video-item video { width: 100%; border: 1px solid #ddd; border-radius: 8px; display: block; background: #000; }
+    .table-wrap { overflow-x: auto; border: 1px solid #ddd; border-radius: 8px; }
+    .result-table { width: 100%; border-collapse: collapse; min-width: 920px; background: #fff; }
+    .result-table th, .result-table td { border: 1px solid #e6e6e6; padding: 8px 10px; font-size: 14px; text-align: center; }
+    .result-table th:first-child, .result-table td:first-child { text-align: left; white-space: nowrap; }
+    .result-table thead th { background: #f5f5f5; }
+    .result-table .best { font-weight: 700; }
+    .fig-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (max-width: 1100px) {
+      .video-grid-four { grid-template-columns: repeat(2, 1fr); }
+      .video-grid-three { grid-template-columns: repeat(2, 1fr); }
+      .teaser-img { width: 90%; }
+    }
+    @media (max-width: 768px) {
+      .video-grid-four, .video-grid-three { grid-template-columns: 1fr; }
+      .teaser-img { width: 100%; }
+    }
+    pre { background: #f5f5f5; border-radius: 8px; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <section class="hero is-light">
+    <div class="hero-body">
+      <div class="container main-container has-text-centered">
+        <h1 class="title is-1">GTA-VLA</h1>
+        <h2 class="subtitle is-4">Guide, Think, Act: Interactive Spatially Steerable Vision-Language-Action</h2>
+        <p class="is-size-5">
+          Yiran Ling<sup>1,2,6,*</sup>, Qing Lian<sup>2,*</sup>, Jinghang Li<sup>2,3</sup>, Qing Jiang<sup>2,4</sup>, Tianming Zhang<sup>5</sup>, Xiaoke Jiang<sup>2</sup>, Chuanxiu Liu<sup>5</sup>, Jie Liu<sup>1,6,&#8224;</sup>, Lei Zhang<sup>2,5,&#8224;</sup>
+        </p>
+        <p class="is-size-7"><em>* Equal contribution (co-first authors)</em></p>
+        <p class="is-size-7"><em>&#8224; Corresponding author: jieliu@hit.edu.cn, leizhang@idea.edu.cn</em></p>
+        <p class="is-size-6">
+          <sup>1</sup>Faculty of Computing, Harbin Institute of Technology<br>
+          <sup>2</sup>International Digital Economy Academy (IDEA)<br>
+          <sup>3</sup>School of Robotics, Hunan University<br>
+          <sup>4</sup>South China University of Technology<br>
+          <sup>5</sup>Visincept<br>
+          <sup>6</sup>National Key Laboratory of Smart Farm Technologies and Systems
+        </p>
+        <div class="paper-links">
+          <a class="button is-dark is-rounded" href="#" target="_blank">Paper</a>
+          <a class="button is-dark is-rounded" href="#" target="_blank">Code</a>
+          <a class="button is-dark is-rounded" href="#" target="_blank">arXiv</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <div class="figure-wrap">
+        <img class="media-img teaser-img" src="static/images/teaser.png" alt="GTA-VLA teaser">
+        <p class="caption-text">Conventional direct VLA policies can fail under spatial ambiguity or imprecise grounding, since they lack an explicit mechanism for interactive correction. GTA-VLA resolves this by using one-shot spatial guidance (affordance points, boxes, or traces) to correct grounding and enable accurate execution.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <h3 class="title is-3 section-title">Abstract</h3>
+      <div class="paper-box">
+        <p>
+          In this paper, we propose <strong>GTA-VLA</strong> (<strong>Guide, Think, Act</strong>), an interactive Vision-Language-Action (VLA) framework that enables spatially steerable embodied reasoning by allowing users to guide robot policies with explicit visual cues. Existing VLA models learn a direct "Sense-to-Act" mapping from multimodal observations to robot actions. While effective within the training distribution, such tightly coupled policies are brittle under out-of-domain (OOD) shifts and difficult to correct when failures occur. Although recent embodied Chain-of-Thought (CoT) approaches expose intermediate reasoning, they still lack a mechanism for incorporating human spatial guidance, limiting their ability to resolve visual ambiguities or recover from mistakes. To address this gap, our framework allows users to optionally guide the policy with spatial priors, such as affordance points, boxes, and traces, which the subsequent reasoning process can directly condition on. Based on these inputs, the model generates a unified spatial-visual Chain-of-Thought that integrates external guidance with internal task planning, aligning human visual intent with autonomous decision-making. For practical deployment, we further couple the reasoning module with a lightweight reactive action head for efficient action execution. Extensive experiments demonstrate the effectiveness of our approach. On the in-domain SimplerEnv WidowX benchmark, our framework achieves a state-of-the-art 81.2% success rate. Under OOD visual shifts and spatial ambiguities, a single visual interaction substantially improves task success over existing methods, highlighting the value of interactive reasoning for failure recovery in embodied control.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <div class="figure-wrap">
+        <img class="media-img" src="static/images/framework.png" alt="GTA-VLA framework">
+        <p class="caption-text">Overview of <strong>GTA-VLA</strong> (<strong>Guide, Think, Act</strong>). The framework consists of three stages. <strong>Guide:</strong> the model receives the primary image, the language instruction, and optional spatial priors (<em>e.g.</em>, affordance points, boxes, or traces). <strong>Think:</strong> the VLM backbone generates a conditioned spatial-visual reasoning sequence and the corresponding latent reasoning states <em>H<sub>reasoning</sub></em>. <strong>Act:</strong> a downstream Flow-Matching action head consumes the latest reasoning states together with high-frequency control observations to produce continuous action chunks. This design decouples slow autoregressive reasoning from fast closed-loop control.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <div class="figure-wrap">
+        <img class="media-img" src="static/images/data_engine.png" alt="GTA-VLA data engine">
+        <p class="caption-text">Interact-306K and automatic instruction annotation. Left: Dataset composition: 306K episodes collected from six manipulation sources. Right: Automatic annotation pipeline: keyframe extraction and task decomposition from trajectories, followed by open-vocabulary grounding and tracking to produce structured subtask instructions with temporally consistent object annotations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <div class="figure-wrap">
+        <img class="media-img" src="static/images/fig3_combined.png" alt="GTA-VLA figure 3 combined">
+        <p class="caption-text">Qualitative examples and success rates across four real-world picking tasks (seen/unseen targets and single/multiple candidate objects). Explicit reasoning improves over the baseline, and point guidance provides the largest gains in unseen and reference-ambiguous settings.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <h3 class="title is-3 section-title">Main Results</h3>
+      <div class="table-wrap">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Spatial</th><th>Object</th><th>Goal</th><th>Long</th><th>LIBERO Avg</th>
+              <th>Spoon</th><th>Carrot</th><th>Cube</th><th>Eggplant</th><th>SimplerEnv Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>OpenVLA</td><td>84.7</td><td>88.4</td><td>79.2</td><td>53.7</td><td>76.5</td><td>4.2</td><td>0.0</td><td>8.3</td><td>45.8</td><td>14.6</td></tr>
+            <tr><td>OpenVLA-OFT</td><td>96.2</td><td>98.3</td><td>96.2</td><td>90.7</td><td>95.3</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>π0</td><td>96.8</td><td>98.8</td><td>95.8</td><td>85.2</td><td>94.1</td><td>50.0</td><td>41.7</td><td>29.2</td><td>70.8</td><td>47.9</td></tr>
+            <tr><td>GR00T-N1</td><td>94.4</td><td>97.6</td><td>93.0</td><td>90.6</td><td>93.9</td><td>64.5</td><td>65.5</td><td>5.5</td><td>93.0</td><td>57.1</td></tr>
+            <tr><td>π0.5</td><td>98.8</td><td>98.2</td><td>98.0</td><td>92.4</td><td>96.9</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>X-VLA</td><td>98.2</td><td>98.6</td><td>97.8</td><td>97.6</td><td>98.1</td><td>95.8</td><td>75.0</td><td>62.5</td><td>70.8</td><td>76.0</td></tr>
+            <tr><td>ThinkAct</td><td>88.3</td><td>91.4</td><td>87.1</td><td>70.9</td><td>84.4</td><td>37.5</td><td>8.7</td><td>58.3</td><td>70.8</td><td>43.8</td></tr>
+            <tr><td>CoT-VLA</td><td>87.5</td><td>91.6</td><td>87.6</td><td>69.0</td><td>81.1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td>Uni-VLA</td><td>97.0</td><td>99.0</td><td>92.6</td><td>90.8</td><td>94.8</td><td>83.3</td><td>66.7</td><td>33.3</td><td>95.8</td><td>69.8</td></tr>
+            <tr><td>MolmoAct</td><td>87.0</td><td>95.4</td><td>87.6</td><td>77.2</td><td>86.6</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            <tr><td class="best">GTA-VLA</td><td class="best">99.0</td><td>98.8</td><td class="best">98.4</td><td class="best">97.6</td><td class="best">98.6</td><td class="best">95.8</td><td class="best">87.5</td><td class="best">66.7</td><td>75.0</td><td class="best">81.2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <h3 class="title is-3 section-title">OOD Generalization (SimplerEnv-Plus)</h3>
+      <div class="table-wrap">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Sensor</th><th>Lighting</th><th>State</th><th>Diversity</th><th>Unseen Obj.</th><th>Distractor</th><th>Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>OpenVLA</td><td>5.2</td><td>6.3</td><td>0.0</td><td>8.3</td><td>2.1</td><td>0.0</td><td>3.7</td></tr>
+            <tr><td>π0.5</td><td>9.4</td><td>10.4</td><td>9.4</td><td>8.3</td><td>6.3</td><td>0.0</td><td>7.3</td></tr>
+            <tr><td>X-VLA</td><td>27.1</td><td>68.8</td><td>68.7</td><td>66.3</td><td>36.2</td><td>46.9</td><td>52.3</td></tr>
+            <tr><td class="best">GTA-VLA</td><td class="best">39.6</td><td class="best">76.1</td><td class="best">79.2</td><td class="best">68.1</td><td class="best">58.3</td><td class="best">50.0</td><td class="best">61.4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <h3 class="title is-3 section-title">Guidance Efficacy</h3>
+      <div class="table-wrap">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Guidance Modality</th>
+              <th>Unseen Toy</th><th>Unseen Fruit</th><th>Unseen Tool</th><th>Unseen Avg</th>
+              <th>Color Distractor</th><th>Pos. Distractor</th><th>Distractor Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dense Instruction (π0.5)</td><td>8.3</td><td>12.5</td><td>8.3</td><td>9.7</td><td>8.3</td><td>8.3</td><td>8.3</td></tr>
+            <tr><td>Dense Instruction (GTA-VLA)</td><td>12.5</td><td>41.6</td><td>29.2</td><td>27.8</td><td>45.8</td><td>29.2</td><td>37.5</td></tr>
+            <tr><td class="best">+ Visual Point Guide</td><td>33.3</td><td>47.9</td><td>41.6</td><td>40.9</td><td class="best">58.3</td><td class="best">50.0</td><td class="best">54.2</td></tr>
+            <tr><td class="best">+ Visual Box Guide</td><td class="best">54.1</td><td class="best">70.8</td><td class="best">45.8</td><td class="best">56.9</td><td>41.6</td><td>45.8</td><td>43.7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <h3 class="title is-3 section-title">Videos</h3>
+      <div class="video-grid-four">
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/widowx_carrot_on_plate_ep2_success1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/widowx_carrot_on_plate_ep6_success1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/widowx_spoon_on_towel_ep18_success1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/widowx_spoon_on_towel_ep23_success1.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="video-grid-three">
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/visual.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/unseen_object.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-item">
+          <video controls muted loop preload="metadata">
+            <source src="static/videos/layout.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container main-container">
+      <h3 class="title is-3 section-title">BibTeX</h3>
+      <pre><code>@article{gtavla2026,
+  title={GTA-VLA: Guide, Think, Act},
+  author={Your Name and Co-authors},
+  journal={arXiv preprint},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+</body>
+</html>
